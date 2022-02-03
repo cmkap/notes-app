@@ -9,13 +9,13 @@ const NotesView = require('./notesView');
 // 1. Setup the model with one note
 const notesModel = new NotesModel;
 console.log('The notes app is running');
-notesModel.addNote('This is an example note')
-notesModel.addNote('This is an example note2')
+// notesModel.addNote('This is an example note')
+
 
 // 2. Setup the view
 const notesView = new NotesView(notesModel);
 
 
 // 3. Make the view display notes
-notesView.displayNotes();
+// notesView.displayNotes();
 

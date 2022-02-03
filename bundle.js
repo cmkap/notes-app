@@ -32,6 +32,14 @@
         constructor(notesModel2) {
           this.notesModel = notesModel2;
           this.mainContainerEl = document.querySelector("#main-container");
+          document.querySelector("#add-note-btn").addEventListener("click", () => {
+            const newNote = document.querySelector("#add-note-input").value;
+            this.addNewNote(newNote);
+          });
+        }
+        addNewNote(newNote) {
+          this.notesModel.addNote(newNote);
+          this.displayNotes();
         }
         displayNotes() {
           const notes = this.notesModel.getNotes();
@@ -52,8 +60,5 @@
   var NotesView = require_notesView();
   var notesModel = new NotesModel();
   console.log("The notes app is running");
-  notesModel.addNote("This is an example note");
-  notesModel.addNote("This is an example note2");
   var notesView = new NotesView(notesModel);
-  notesView.displayNotes();
 })();
