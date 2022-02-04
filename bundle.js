@@ -42,6 +42,10 @@
           this.displayNotes();
         }
         displayNotes() {
+          document.querySelector("#add-note-input").value = "";
+          document.querySelectorAll(".note").forEach((element) => {
+            element.remove();
+          });
           const notes = this.notesModel.getNotes();
           notes.forEach((note) => {
             let noteEl = document.createElement("div");
