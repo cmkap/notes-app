@@ -1,10 +1,10 @@
 class NotesModel {
     constructor() {
-        this.notes = []
+        this.notes = [];
     }
 
     getNotes() {
-        return this.notes
+        return this.notes;
     }
 
     addNote(note) {
@@ -12,8 +12,15 @@ class NotesModel {
     }
 
     reset() {
-        this.notes = []
+        this.notes = [];
     }
+
+    setNotes(notes) {
+        notes.forEach (note => {
+            this.notes.push(note);
+        });
+    }
+    
 }
 
 module.exports = NotesModel;

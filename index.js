@@ -3,19 +3,18 @@
 // to help in debugging and getting visibility in your JS code.
 //
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
+const NotesApi = require('./notesApi');
 const NotesModel = require('./notesModel');
 const NotesView = require('./notesView');
 
-// 1. Setup the model with one note
-const notesModel = new NotesModel;
-console.log('The notes app is running');
-// notesModel.addNote('This is an example note')
+const api = new NotesApi();
+const model = new NotesModel();
+const view = new NotesView(model, api);
 
 
-// 2. Setup the view
-const notesView = new NotesView(notesModel);
-
-
-// 3. Make the view display notes
-// notesView.displayNotes();
+api.loadNotes((notes) => {
+    // This method is new — you'll need to add it to the model class
+    model.setNotes(notes);
+    view.displayNotes();
+  });
 

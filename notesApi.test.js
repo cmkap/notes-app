@@ -1,21 +1,32 @@
 
 const NotesApi = require('./notesApi');
 
-// This makes `fetch` available to our test
-// (it is not by default, as normally `fetch` is only
-// available within the browser)
-require('jest-fetch-mock').enableMocks()
+require('jest-fetch-mock').enableMocks();
 
-describe('Notes class', () => {
-  it('calls fetch and loads repo info', async () => {
+describe('NotesApi', () => {
+  it('calls fetch and displays notes on the page', async () => {
     const api = new NotesApi();
     fetch.mockResponseOnce(JSON.stringify({
-      name: 'rails/rails',
-      description: 'Ruby on Rails'
+      notes: ['This note is coming from the server']
     }));
 
-    api.getRepoInfo('rails/rails', (repoInfo) => {
-      expect(repoInfo.description).toBe('Ruby on Rails');
+    api.loadNotes((response) => {
+      expect(response.notes[0]).toBe('This note is coming from the server');
     });
   });
+
+  jest.mock('./notesApi');
+
+  it('posts a note to the server', async () => {
+    const api = new NotesApi();
+    api.createNote('This is another note')
+
+    fetch.mockResponseOnce(JSON.stringify());
+    
+    api.loadNotes((response) => {
+      expect(response).toBe(["This note is coming from the server", "This is another note"]);
+    });
+  });
+
+
 });
